@@ -1,12 +1,9 @@
-# TBD
+# Dotfiles
 
 ## Usage
 
 ```sh
 sudo nixos-rebuild switch --flake .
-
-```
-```
 ```
 
 ## Resources:
