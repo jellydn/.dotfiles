@@ -17,7 +17,11 @@ jobs:
 
       - name: Check Nix formatting
         run: |
-          nix fmt && git diff --exit-code
+          nix fmt
+          # nix fmt may trigger evaluation that auto-updates flake.lock;
+          # restore it so the diff only checks .nix formatting
+          git checkout -- flake.lock 2>/dev/null || true
+          git diff --exit-code
 
   # ── Evaluate flake for each target system ──────────────────
   # Nix evaluation is fast and catches syntax/type errors early.

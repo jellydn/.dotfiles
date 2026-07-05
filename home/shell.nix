@@ -19,9 +19,8 @@
     };
 
     # initContent replaces initExtraFirst and initExtra
-    # Pure prompt runs early via mkBefore
-    initContent =
-      lib.mkBefore ''
+    # Pure prompt runs early via mkBefore; remaining content follows
+    initContent = lib.mkBefore (''
         # Initialize Pure prompt
         fpath+=("${pkgs.pure-prompt}/share/zsh/site-functions")
         autoload -U promptinit && promptinit && prompt pure
@@ -45,7 +44,7 @@
         # Locale
         export LANG="en_US.UTF-8"
         export LC_ALL="en_US.UTF-8"
-      '';
+      '');
   };
 
   # Zsh plugin packages
