@@ -11,7 +11,8 @@
   # this is for shared darwin module options.
 
   # ── Touch ID for sudo ───────────────────────────────────────
-  security.pam.enableSudoTouchIdAuth = true;
+  # Note: security.pam.enableSudoTouchIdAuth was deprecated in nix-darwin after 24.11
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # ── Shell completion paths ─────────────────────────────────
   environment.pathsToLink = [

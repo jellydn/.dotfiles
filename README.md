@@ -42,7 +42,7 @@ sudo nixos-rebuild switch --flake .
 
 ```sh
 nix run nix-darwin -- switch --flake .
-darwin-rebuild switch --flake .
+darwin-rebuild switch --flake .#dunghd
 ```
 
 ### Safe testing (no system changes)

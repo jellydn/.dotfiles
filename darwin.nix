@@ -112,7 +112,7 @@
   programs.zsh.enable = true;
 
   # ── Services ───────────────────────────────────────────────
-  services.nix-daemon.enable = true;
+  # services.nix-daemon.enable has been removed in nix-darwin 26.x — nix.enable manages the daemon automatically.
 
   # ── Allow Unfree ───────────────────────────────────────────
   nixpkgs.config.allowUnfree = true;

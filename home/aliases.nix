@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.shellAliases = {
@@ -36,5 +36,11 @@
     dots = "cd ~/Projects/dotfiles";
     mine = "cd ~/src";
     try = "~/.local/bin/try";
+  }
+  // lib.optionalAttrs pkgs.stdenv.isLinux {
+    nrb = "sudo nixos-rebuild switch --flake .";
+  }
+  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    ndrb = "darwin-rebuild switch --flake .";
   };
 }

@@ -164,42 +164,16 @@
       # Reload config
       bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
 
-      # Edit config
-      bind e new-window -n "tmux.conf" "nvim ~/.config/tmux/tmux.conf && tmux source-file ~/.config/tmux/tmux.conf && tmux display-message 'Config reloaded!'"
-
-      # Vim-style pane navigation
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-
-      # Resize panes
-      bind -r H resize-pane -L 5
-      bind -r J resize-pane -D 5
-      bind -r K resize-pane -U 5
-      bind -r L resize-pane -R 5
-
-      # Window navigation
-      bind-key Tab next-window
-      bind-key BTab previous-window
-
-      # Vim-style copy mode
-      bind -T copy-mode-vi v send-keys -X begin-selection
-      bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-
-      # Smart pane switching with awareness of Vim splits
-      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf|lazygit)(diff)?$'"
+      # is_vim helper — single line, no escaping needed in Nix '' strings
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\S+/)?g?(view|l?n?vim?x?|fzf|lazygit)(diff)?$'"
       bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
       bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
       bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
       bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
 
       tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\\1/p")'
-      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\' 'select-pane -l'"
-      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\' 'select-pane -l'"
+      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\' 'select-pane -l'"
+      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\' 'select-pane -l'"
 
       # Copy mode vim-aware navigation
       bind-key -T copy-mode-vi 'C-h' select-pane -L
@@ -211,9 +185,9 @@
       bind-key -n PageUp if-shell "$is_vim" 'send-keys PageUp' 'copy-mode -u'
       bind-key -n PageDown if-shell "$is_vim" 'send-keys PageDown' 'send-keys PageDown'
 
-      # URL handling - extract and open
+      # URL handling — open on macOS, xdg-open on Linux
       bind-key u capture-pane \; save-buffer /tmp/tmux-buffer \; new-window -n urls '$SHELL -c "grep -oE \"https?://[a-zA-Z0-9./?=_%:-]*\" /tmp/tmux-buffer | sort -u | fzf --prompt=\"Open URL: \" --bind=\"enter:execute(open {})\""'
-      bind-key C-u capture-pane \; save-buffer /tmp/tmux-buffer \; run-shell 'grep -oE "https?://[a-zA-Z0-9./?=_%:-]*" /tmp/tmux-buffer | head -1 | pbcopy' \; display-message "URL copied to clipboard"
+      bind-key C-u capture-pane \; save-buffer /tmp/tmux-buffer \; run-shell '$SHELL -c "grep -oE \"https?://[a-zA-Z0-9./?=_%:-]*\" /tmp/tmux-buffer | head -1 | if command -v pbcopy &>/dev/null; then pbcopy; elif command -v wl-copy &>/dev/null; then wl-copy; elif command -v xclip &>/dev/null; then xclip -selection clipboard; else cat; fi"' \; display-message "URL copied to clipboard"
 
       # OSC52 clipboard
       set -g @copy_use_osc52_fallback on
