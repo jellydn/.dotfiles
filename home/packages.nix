@@ -59,8 +59,8 @@
       nixfmt
       statix
       deadnix
-      nodePackages.biome
-      nodePackages.prettier
+      biome
+      prettier
       typos # Spell checker
 
       # ── Misc Utilities ─────────────────────────────────────

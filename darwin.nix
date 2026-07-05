@@ -9,6 +9,9 @@
 
 {
   # ── System ─────────────────────────────────────────────────
+  # Identify the primary user for user-level settings (dock, finder, homebrew)
+  system.primaryUser = "huynhdung";
+
   system.defaults = {
     # Finder
     finder = {

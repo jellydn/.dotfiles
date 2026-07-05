@@ -69,7 +69,7 @@
           eza
           fzf
           tree
-          du-dust
+          dust
           duf
           procs
           sd
@@ -106,8 +106,8 @@
           nixfmt
           statix
           deadnix
-          nodePackages.biome
-          nodePackages.prettier
+          biome
+          prettier
           typos
 
           # Misc

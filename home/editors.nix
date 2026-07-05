@@ -22,15 +22,15 @@ in
     extraPackages = with pkgs; [
       # LSP servers (commonly used)
       nil # Nix
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
+      typescript-language-server
+      vscode-langservers-extracted # HTML, CSS, JSON
       lua-language-server
       rust-analyzer
       gopls
       pyright
       # Formatters
-      nodePackages.biome
-      nodePackages.prettier
+      biome
+      prettier
       nixfmt
       stylua
       # Tools
