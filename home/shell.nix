@@ -18,14 +18,15 @@
       path = "$HOME/.zsh_history";
     };
 
-    # Pure prompt (referenced via home.packages, activated in initExtraFirst)
-    initExtraFirst = ''
+    # initContentFirst runs early in zsh startup (replaces deprecated initExtraFirst)
+    initContentFirst = ''
       # Initialize Pure prompt
       fpath+=("${pkgs.zsh-pure-prompt}/share/zsh/site-functions")
       autoload -U promptinit && promptinit && prompt pure
     '';
 
-    initExtra = ''
+    # initContent runs at the normal point in zsh startup (replaces deprecated initExtra)
+    initContent = ''
       # Atuin shell history
       if command -v atuin &>/dev/null; then
         eval "$(atuin init zsh)"

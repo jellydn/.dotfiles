@@ -43,14 +43,15 @@ in
   # ── NeoVim config: symlink to dotfiles repo ─────────────────
   # Links ~/.config/nvim -> ~/Projects/dotfiles/common/.config/nvim
   # The dotfiles repo manages this as a git submodule (jellydn/tiny-nvim)
+  # ⚠️  You must remove ~/.config/nvim manually before applying this config if it already exists.
+  # Without force = true, home-manager will fail explicitly (safe) rather than silently deleting your data.
   xdg.configFile."nvim" = {
     source = dotfilesNvim;
     recursive = true;
-    force = true; # Overrides existing directory to replace it with a symlink
     onChange = ''
-      # After linking, install lazy.nvim and plugins
+      # After symlinking, install lazy.nvim and plugins
       if command -v nvim &>/dev/null; then
-        nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
+        nvim --headless "+Lazy! sync" +qa >/dev/null
       fi
     '';
   };
