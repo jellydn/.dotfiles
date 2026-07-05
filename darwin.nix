@@ -107,7 +107,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
     nerd-fonts.inconsolata
-    nerd-fonts.maple-mono-nf
+    maple-mono.Normal-NF
   ];
 
   # ── Shell ──────────────────────────────────────────────────
