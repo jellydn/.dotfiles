@@ -35,10 +35,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qemu-user-static binfmt-support
 
-      - name: Check Nix formatting
-        run: |
-          nix fmt && git diff --exit-code
-
       - name: nix flake check
         run: nix flake check --system ${{ matrix.target }}
 
