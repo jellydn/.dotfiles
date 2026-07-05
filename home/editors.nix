@@ -1,0 +1,63 @@
+{
+  config,
+  pkgs,
+  dotfiles,
+  ...
+}:
+
+let
+  # Path to the dotfiles neovim config from flake input
+  # Note: nvim is a git submodule (jellydn/tiny-nvim) in the dotfiles repo.
+  # If fetched without submodules, this directory may be empty — nvim still works, just without custom config.
+  dotfilesNvim = dotfiles + "/common/.config/nvim";
+in
+{
+  # ── Neovim ──────────────────────────────────────────────────
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    defaultEditor = true;
+
+    extraPackages = with pkgs; [
+      # LSP servers (commonly used)
+      nil # Nix
+      typescript-language-server
+      vscode-langservers-extracted # HTML, CSS, JSON
+      lua-language-server
+      rust-analyzer
+      gopls
+      pyright
+      # Formatters
+      biome
+      prettier
+      nixfmt
+      stylua
+      # Tools
+      ripgrep
+      fd
+      lazygit
+    ];
+  };
+
+  # ── NeoVim config: symlink to dotfiles repo ─────────────────
+  # Links ~/.config/nvim -> ~/Projects/dotfiles/common/.config/nvim
+  # The dotfiles repo manages this as a git submodule (jellydn/tiny-nvim)
+  # ⚠️  You must remove ~/.config/nvim manually before applying this config if it already exists.
+  # Without force = true, home-manager will fail explicitly (safe) rather than silently deleting your data.
+  xdg.configFile."nvim" = {
+    source = dotfilesNvim;
+    recursive = true;
+    onChange = ''
+      # After symlinking, install lazy.nvim and plugins
+      if command -v nvim &>/dev/null; then
+        nvim --headless "+Lazy! sync" +qa >/dev/null
+      fi
+    '';
+  };
+
+  # ── Helix (also present in dotfiles) ─────────────────────────
+  programs.helix = {
+    enable = true;
+  };
+}
