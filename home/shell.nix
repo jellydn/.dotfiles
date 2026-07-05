@@ -18,15 +18,14 @@
       path = "$HOME/.zsh_history";
     };
 
-    # initContentFirst runs early in zsh startup (replaces deprecated initExtraFirst)
-    initContentFirst = ''
+    # initExtraFirst runs early in zsh startup
+    initExtraFirst = ''
       # Initialize Pure prompt
-      fpath+=("${pkgs.zsh-pure-prompt}/share/zsh/site-functions")
+      fpath+=("${pkgs.pure-prompt}/share/zsh/site-functions")
       autoload -U promptinit && promptinit && prompt pure
     '';
 
-    # initContent runs at the normal point in zsh startup (replaces deprecated initExtra)
-    initContent = ''
+    initExtra = ''
       # Atuin shell history
       if command -v atuin &>/dev/null; then
         eval "$(atuin init zsh)"
@@ -50,7 +49,7 @@
 
   # Zsh plugin packages
   home.packages = with pkgs; [
-    zsh-pure-prompt # Pure prompt
+    pure-prompt # Pure prompt
     atuin # Shell history
     zoxide # Smarter cd
     direnv # Environment switcher
