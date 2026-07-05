@@ -9,9 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
-      # master branch requires nixpkgs-unstable for option compatibility
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:LnL7/nix-darwin/nix-darwin-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Dotfiles repo - source for symlinked config files (helix, ghostty, lazygit, kitty, nvim)
     dotfiles = {
