@@ -56,7 +56,7 @@
 
       # ── LSP / Formatting ───────────────────────────────────
       nil # Nix LSP
-      nixfmt-rfc-style
+      nixfmt
       statix
       deadnix
       nodePackages.biome
