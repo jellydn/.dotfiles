@@ -25,6 +25,7 @@
     , nixpkgs-unstable
     , home-manager
     , nix-darwin
+    , dotfiles
     , ...
     }:
     let

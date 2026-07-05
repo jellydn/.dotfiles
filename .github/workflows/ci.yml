@@ -14,7 +14,8 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - name: Check Nix formatting
-        run: nix fmt --check
+        run: |
+          nix fmt && git diff --exit-code
 
   # ── Evaluate flake for each target system ──────────────────
   # Nix evaluation is fast and catches syntax/type errors early.
@@ -35,7 +36,8 @@ jobs:
           sudo apt-get install -y qemu-user-static binfmt-support
 
       - name: Check Nix formatting
-        run: nix fmt --check
+        run: |
+          nix fmt && git diff --exit-code
 
       - name: nix flake check
         run: nix flake check --system ${{ matrix.target }}
