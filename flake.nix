@@ -1,15 +1,15 @@
 {
-  description = "jellydn's NixOS + nix-darwin + home-manager configuration";
+  description = "jellydn's NixOS + nix-darwin + home-manager configuration (26.05)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-24.05";
+      url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Dotfiles repo - source for symlinked config files (helix, ghostty, lazygit, kitty, nvim)
@@ -35,7 +35,7 @@
         imports = [ ./home ];
         home = {
           inherit username homeDirectory;
-          stateVersion = "24.05";
+          stateVersion = "26.05";
         };
       };
 
@@ -101,7 +101,7 @@
 
           # LSP / Formatting
           nil
-          nixfmt-rfc-style
+          nixfmt
           statix
           deadnix
           nodePackages.biome
@@ -137,9 +137,9 @@
       };
 
       # ── Formatter (nix fmt) ────────────────────────────────────
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
-      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixfmt-rfc-style;
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixfmt;
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt;
 
       # ── Dev shells (nix develop) ──────────────────────────────
       devShells.aarch64-linux.default = nixpkgs.legacyPackages.aarch64-linux.mkShellNoCC {

@@ -224,8 +224,9 @@
 
     # TPM plugins
     # TPM is initialized automatically by home-manager
+    # TPM is not packaged in Nixpkgs (incompatible with Nix's declarative model).
+    # Home-manager handles plugin initialization automatically.
     plugins = [
-      pkgs.tmuxPlugins.tpm
       pkgs.tmuxPlugins.vim-tmux-navigator
       {
         plugin = pkgs.tmuxPlugins.resurrect;

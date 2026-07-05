@@ -1,4 +1,10 @@
-{ config, pkgs, lib, dotfiles, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  dotfiles,
+  ...
+}:
 
 let
   dotfilesCfg = "${dotfiles}/common/.config";

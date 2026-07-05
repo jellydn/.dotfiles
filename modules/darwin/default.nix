@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # This module contains darwin-specific configurations that apply
@@ -9,5 +14,8 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   # ── Shell completion paths ─────────────────────────────────
-  environment.pathsToLink = [ "/share/zsh" "/share/fish" ];
+  environment.pathsToLink = [
+    "/share/zsh"
+    "/share/fish"
+  ];
 }

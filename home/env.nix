@@ -59,7 +59,11 @@
     enableFishIntegration = true;
     enableBashIntegration = true;
     defaultCommand = "fd --type f --hidden --follow --exclude .git";
-    defaultOptions = [ "--height 40%" "--layout=reverse" "--border" ];
+    defaultOptions = [
+      "--height 40%"
+      "--layout=reverse"
+      "--border"
+    ];
     fileWidgetCommand = "fd --type f --hidden --follow --exclude .git";
     changeDirWidgetCommand = "fd --type d --hidden --follow --exclude .git";
   };
@@ -70,6 +74,9 @@
     enableZshIntegration = true;
     enableFishIntegration = true;
     enableBashIntegration = true;
-    options = [ "--cmd" "cd" ];
+    options = [
+      "--cmd"
+      "cd"
+    ];
   };
 }

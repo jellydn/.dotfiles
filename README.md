@@ -9,13 +9,13 @@
       <img src="https://github.com/jellydn/.dotfiles/actions/workflows/ci.yml/badge.svg" alt="CI">
     </a>
     <a href="https://nixos.org">
-      <img src="https://img.shields.io/badge/NixOS-24.05-5277C3?logo=nixos&logoColor=white" alt="NixOS">
+      <img src="https://img.shields.io/badge/NixOS-26.05-5277C3?logo=nixos&logoColor=white" alt="NixOS">
     </a>
     <a href="https://github.com/LnL7/nix-darwin">
-      <img src="https://img.shields.io/badge/macOS-nix--darwin-999999?logo=apple&logoColor=white" alt="macOS">
+      <img src="https://img.shields.io/badge/macOS-nix--darwin-26.05-999999?logo=apple&logoColor=white" alt="macOS">
     </a>
     <a href="https://github.com/nix-community/home-manager">
-      <img src="https://img.shields.io/badge/home--manager-24.05-3E863A?logo=nixos&logoColor=white" alt="home-manager">
+      <img src="https://img.shields.io/badge/home--manager-26.05-3E863A?logo=nixos&logoColor=white" alt="home-manager">
     </a>
   </p>
 </div>
@@ -92,10 +92,10 @@ nix develop
 
 | Input | Source | Purpose |
 |---|---|---|
-| `nixpkgs` | `nixos-24.05` | Stable Nixpkgs |
+| `nixpkgs` | `nixos-26.05` | Stable Nixpkgs |
 | `nixpkgs-unstable` | `nixos-unstable` | Bleeding-edge packages via `unstable`/`unstableDarwin` |
-| `home-manager` | `release-24.05` | User-level package/config management |
-| `nix-darwin` | `master` | macOS system config (defaults, homebrew, nix daemon) |
+| `home-manager` | `release-26.05` | User-level package/config management |
+| `nix-darwin` | `nix-darwin-26.05` | macOS system config (defaults, homebrew, nix daemon) |
 | `dotfiles` | `github:jellydn/dotfiles` | Source for symlinked configs (helix, ghostty, lazygit, kitty, neovim) |
 
 ## 🔗 Dotfiles symlinks

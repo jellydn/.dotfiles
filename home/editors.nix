@@ -31,7 +31,7 @@ in
       # Formatters
       nodePackages.biome
       nodePackages.prettier
-      nixfmt-rfc-style
+      nixfmt
       stylua
       # Tools
       ripgrep

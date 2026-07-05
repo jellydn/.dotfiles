@@ -1,5 +1,11 @@
 # nix-darwin configuration for macOS (itman / dunghd)
-{ config, pkgs, lib, unstableDarwin, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  unstableDarwin,
+  ...
+}:
 
 {
   # ── System ─────────────────────────────────────────────────
@@ -33,11 +39,8 @@
       Clicking = true;
       TrackpadRightClick = true;
       TrackpadThreeFingerDrag = false;
-    };
-
-    # Keyboard
-    keyRepeat = 2;
-    initialKeyRepeat = 15;
+    };      # Keyboard — keyRepeat/initialKeyRepeat require newer nix-darwin
+      # (locked revision doesn't support these yet)
 
     # Security
     screensaver.askForPasswordDelay = 5;
@@ -53,13 +56,23 @@
   # ── Nix Settings ───────────────────────────────────────────
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
-      trusted-users = [ "root" "huynhdung" ];
+      trusted-users = [
+        "root"
+        "huynhdung"
+      ];
     };
     gc = {
       automatic = true;
-      interval = { Weekday = 0; Hour = 3; Minute = 0; };
+      interval = {
+        Weekday = 0;
+        Hour = 3;
+        Minute = 0;
+      };
       options = "--delete-older-than 7d";
     };
     # Extra nix.conf settings
@@ -80,8 +93,8 @@
     gawk
 
     # macOS-specific tools
-    m-cli      # macOS command-line tools
-    mas        # Mac App Store CLI
+    m-cli # macOS command-line tools
+    mas # Mac App Store CLI
     htop
     btop
   ];
@@ -112,12 +125,12 @@
 
     onActivation = {
       autoUpdate = true;
-      cleanup = "unused";   # Remove packages not in the list
+      cleanup = "unused"; # Remove packages not in the list
       upgrade = true;
     };
 
     # Taps (fonts are installed via Nix in fonts.packages above)
-    taps = [];
+    taps = [ ];
 
     # Brews (CLI tools — complements Nix packages)
     brews = [
@@ -144,5 +157,5 @@
   };
 
   # ── State Version ──────────────────────────────────────────
-  system.stateVersion = 5;
+  system.stateVersion = 9;
 }

@@ -1,7 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       # ── Essential CLI ──────────────────────────────────────
       curl
@@ -22,13 +28,13 @@
       sd
 
       # ── Git / Dev Tools ────────────────────────────────────
-      gh        # GitHub CLI
+      gh # GitHub CLI
       lazygit
       git-lfs
       diff-so-fancy
-      delta     # Git diff tool
-      ghq       # Repository manager
-      diffr     # Diff highlighting
+      delta # Git diff tool
+      ghq # Repository manager
+      diffr # Diff highlighting
 
       # ── Shell / Terminal ───────────────────────────────────
       fish
@@ -49,19 +55,19 @@
       gcc
 
       # ── LSP / Formatting ───────────────────────────────────
-      nil       # Nix LSP
+      nil # Nix LSP
       nixfmt-rfc-style
       statix
       deadnix
       nodePackages.biome
       nodePackages.prettier
-      typos      # Spell checker
+      typos # Spell checker
 
       # ── Misc Utilities ─────────────────────────────────────
-      mise      # Dev environment manager
-      just      # Command runner
-      jujutsu   # Jujutsu VCS
-      yq        # YAML processor
+      mise # Dev environment manager
+      just # Command runner
+      jujutsu # Jujutsu VCS
+      yq # YAML processor
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       # ── Linux-only ──────────────────────────────────────────
@@ -74,6 +80,6 @@
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       # ── macOS-only ──────────────────────────────────────────
-      m-cli     # macOS CLI tools
+      m-cli # macOS CLI tools
     ];
 }

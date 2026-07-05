@@ -49,10 +49,10 @@
 
   # Zsh plugin packages
   home.packages = with pkgs; [
-    zsh-pure-prompt  # Pure prompt
-    atuin            # Shell history
-    zoxide           # Smarter cd
-    direnv           # Environment switcher
+    zsh-pure-prompt # Pure prompt
+    atuin # Shell history
+    zoxide # Smarter cd
+    direnv # Environment switcher
   ];
 
   # ── Fish ────────────────────────────────────────────────────

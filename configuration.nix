@@ -2,7 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, lib, unstable, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  unstable,
+  ...
+}:
 
 {
   imports = [
@@ -60,7 +66,13 @@
   users.users.dunghd = {
     isNormalUser = true;
     description = "Dung Huynh Duc";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "audio"
+      "docker"
+    ];
     shell = pkgs.fish;
   };
 
@@ -96,9 +108,15 @@
   # ── Nix Settings ───────────────────────────────────────────
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
-      trusted-users = [ "root" "dunghd" ];
+      trusted-users = [
+        "root"
+        "dunghd"
+      ];
     };
     gc = {
       automatic = true;
@@ -121,5 +139,5 @@
   ];
 
   # ── State Version ──────────────────────────────────────────
-  system.stateVersion = "24.05";
+  system.stateVersion = "26.05";
 }
