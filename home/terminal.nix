@@ -164,7 +164,7 @@
       # Reload config
       bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
 
-      # is_vim helper — single line, no escaping needed in Nix '' strings
+      # is_vim helper — single line, backslash is literal in Nix indented strings
       is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\S+/)?g?(view|l?n?vim?x?|fzf|lazygit)(diff)?$'"
       bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
       bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
