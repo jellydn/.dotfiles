@@ -8,5 +8,6 @@
     ./env.nix
     ./aliases.nix
     ./ghostty.nix
+    ./dotfiles-links.nix
   ];
 }

@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, dotfiles, ... }:
 
 let
-  # Path to the dotfiles neovim config (git submodule: jellydn/tiny-nvim)
-  dotfilesNvim = "${config.home.homeDirectory}/Projects/dotfiles/common/.config/nvim";
+  # Path to the dotfiles neovim config from flake input
+  # Note: nvim is a git submodule (jellydn/tiny-nvim) in the dotfiles repo.
+  # If fetched without submodules, this directory may be empty — nvim still works, just without custom config.
+  dotfilesNvim = dotfiles + "/common/.config/nvim";
 in
 {
   # ── Neovim ──────────────────────────────────────────────────

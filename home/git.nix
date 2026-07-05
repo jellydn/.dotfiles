@@ -104,26 +104,8 @@
   };
 
   # ── LazyGit ─────────────────────────────────────────────────
+  # Config is symlinked from dotfiles repo via home/dotfiles-links.nix
   programs.lazygit = {
     enable = true;
-    settings = {
-      gui.theme = {
-        lightTheme = false;
-        activeBorderColor = [ "#7e9cd8" "bold" ];
-        inactiveBorderColor = [ "#545a6e" ];
-        optionsTextColor = "#7e9cd8";
-        selectedLineBgColor = [ "#2d334a" ];
-        selectedRangeBgColor = [ "#2d334a" ];
-        cherryPickedCommitBgColor = [ "#545a6e" ];
-        cherryPickedCommitFgColor = [ "#7e9cd8" ];
-        unstagedChangesColor = [ "#e26a7a" ];
-        defaultFgColor = [ "#c8d3f5" ];
-        searchPrefixColor = [ "#b3f1c8" ];
-      };
-      os.editCommand = "nvim";
-      os.editCommandTemplate = "nvim {{filename}}";
-      git.paging.colorArg = "always";
-      git.paging.pager = "delta --dark --paging=never";
-    };
   };
 }
