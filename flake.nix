@@ -10,7 +10,7 @@
     };
     nix-darwin = {
       # Pin to June 2024 commit compatible with nixpkgs 24.05
-      url = "github:LnL7/nix-darwin/a66c9d09a801979953930ae56b9c9f654b7c10b0";
+      url = "github:LnL7/nix-darwin/50581970f37f06a4719001735828519925ef8310";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Dotfiles repo - source for symlinked config files (helix, ghostty, lazygit, kitty, nvim)
