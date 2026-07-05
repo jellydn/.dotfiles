@@ -60,7 +60,7 @@
       # ── Misc Utilities ─────────────────────────────────────
       mise      # Dev environment manager
       just      # Command runner
-      jj        # Jujutsu VCS (was jujutsu)
+      jujutsu   # Jujutsu VCS
       yq        # YAML processor
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
@@ -70,7 +70,7 @@
       wl-clipboard
       kitty
       playerctl
-      mpc_cli
+      mpc-cli
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       # ── macOS-only ──────────────────────────────────────────

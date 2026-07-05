@@ -116,10 +116,8 @@
       upgrade = true;
     };
 
-    # Taps
-    taps = [
-      "homebrew/cask-fonts"
-    ];
+    # Taps (fonts are installed via Nix in fonts.packages above)
+    taps = [];
 
     # Brews (CLI tools — complements Nix packages)
     brews = [

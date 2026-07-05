@@ -25,8 +25,7 @@
     top = "htop";
     tree = "tree -C";
 
-    # Nix
-    nrb = "sudo nixos-rebuild switch --flake .";
+    # Nix (platform-specific rebuild aliases)
     ndev = "nix develop";
     nsh = "nix shell";
     nix-search = "nix search nixpkgs";
