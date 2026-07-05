@@ -240,7 +240,7 @@
   };
 
   # ── Zellij ──────────────────────────────────────────────────
-  # Note: extraConfig for keybindings is not available in home-manager 24.05.
+  # Note: extraConfig for keybindings is not available in home-manager 26.05.
   # Keybindings use the default tmux mode (Ctrl+g) and can be customized
   # via ~/.config/zellij/config.kdl directly.
   programs.zellij = {
