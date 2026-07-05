@@ -224,11 +224,11 @@
 
     # TPM plugins
     # TPM is initialized automatically by home-manager
-    plugins = with pkgs.tmuxPlugins; [
-      tpm
-      vim-tmux-navigator
+    plugins = [
+      pkgs.tmuxPlugins.tpm
+      pkgs.tmuxPlugins.vim-tmux-navigator
       {
-        plugin = resurrect;
+        plugin = pkgs.tmuxPlugins.resurrect;
         extraConfig = ''
           set -g @resurrect-strategy-vim 'session'
           set -g @resurrect-strategy-nvim 'session'
