@@ -92,9 +92,9 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
-    nerd-fonts.inconsolata      nerd-fonts.terminess-ttf
+    nerd-fonts.inconsolata
+    nerd-fonts.terminess-ttf
     noto-fonts
-    noto-fonts-cjk
     noto-fonts-emoji
   ];
 
