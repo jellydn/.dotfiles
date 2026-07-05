@@ -9,7 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      # Pin to June 2024 commit compatible with nixpkgs 24.05
+      url = "github:LnL7/nix-darwin/a66c9d09a801979953930ae56b9c9f654b7c10b0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Dotfiles repo - source for symlinked config files (helix, ghostty, lazygit, kitty, nvim)
@@ -20,13 +21,14 @@
   };
 
   outputs =
-    inputs@{ self
-    , nixpkgs
-    , nixpkgs-unstable
-    , home-manager
-    , nix-darwin
-    , dotfiles
-    , ...
+    inputs@{
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      nix-darwin,
+      dotfiles,
+      ...
     }:
     let
       # Shared home-manager config (works on both NixOS and macOS)
@@ -51,26 +53,68 @@
 
       # Common dev shell packages (shared between platforms)
       # Derived from home/packages.nix, using only cross-platform tools
-      devPackages = pkgs: with pkgs; [
-        # CLI essentials
-        curl wget jq unzip zip htop ripgrep fd bat eza fzf tree du-dust duf procs sd
+      devPackages =
+        pkgs: with pkgs; [
+          # CLI essentials
+          curl
+          wget
+          jq
+          unzip
+          zip
+          htop
+          ripgrep
+          fd
+          bat
+          eza
+          fzf
+          tree
+          du-dust
+          duf
+          procs
+          sd
 
-        # Git / Dev tools
-        gh lazygit git-lfs diff-so-fancy delta ghq diffr
+          # Git / Dev tools
+          gh
+          lazygit
+          git-lfs
+          diff-so-fancy
+          delta
+          ghq
+          diffr
 
-        # Shell / Terminal
-        fish zsh tmux direnv zoxide
+          # Shell / Terminal
+          fish
+          zsh
+          tmux
+          direnv
+          zoxide
 
-        # Languages
-        nodejs_22 deno bun go python3 rustup gnumake cmake gcc
+          # Languages
+          nodejs_22
+          deno
+          bun
+          go
+          python3
+          rustup
+          gnumake
+          cmake
+          gcc
 
-        # LSP / Formatting
-        nil nixfmt-rfc-style statix deadnix
-        nodePackages.biome nodePackages.prettier typos
+          # LSP / Formatting
+          nil
+          nixfmt-rfc-style
+          statix
+          deadnix
+          nodePackages.biome
+          nodePackages.prettier
+          typos
 
-        # Misc
-        mise just jujutsu yq
-      ];
+          # Misc
+          mise
+          just
+          jujutsu
+          yq
+        ];
     in
     {
       # ── NixOS (ARM Linux machine) ──────────────────────────────
