@@ -76,7 +76,7 @@
       wl-clipboard
       kitty
       playerctl
-      mpc-cli
+      mpc
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       # ── macOS-only ──────────────────────────────────────────

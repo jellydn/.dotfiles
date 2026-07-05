@@ -128,7 +128,7 @@
 
     onActivation = {
       autoUpdate = true;
-      cleanup = "unused"; # Remove packages not in the list
+      cleanup = "uninstall"; # Remove packages not in the list
       upgrade = true;
     };
 
