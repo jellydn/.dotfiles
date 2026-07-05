@@ -1,0 +1,74 @@
+name: "Nix Flake CI"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Evaluate flake for each target system ──────────────────
+  # Nix evaluation is fast and catches syntax/type errors early.
+  check:
+    strategy:
+      matrix:
+        target: [x86_64-linux, aarch64-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v14
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Enable QEMU for aarch64
+        if: ${{ contains(matrix.target, 'aarch64') }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static binfmt-support
+
+      - name: nix flake check
+        run: nix flake check --system ${{ matrix.target }}
+
+  # ── Build NixOS config (aarch64-linux via QEMU) ────────────
+  # home-manager is integrated as a module inside nixosConfigurations,
+  # so building the system toplevel validates everything.
+  build-nixos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v14
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Enable QEMU for aarch64
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static binfmt-support
+
+      - name: Build NixOS system (includes home-manager)
+        run: |
+          nix build .#nixosConfigurations.nixos.config.system.build.toplevel \
+            --eval-system x86_64-linux \
+            --system aarch64-linux
+
+      - name: Build NixOS dev shell
+        run: |
+          nix build .#devShells.aarch64-linux.default \
+            --eval-system x86_64-linux \
+            --system aarch64-linux
+
+  # ── Build darwin config (macOS) ────────────────────────────
+  # The darwin system build includes the integrated home-manager module,
+  # so a separate home-manager build is not needed.
+  build-darwin:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v14
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Build darwin system (includes home-manager)
+        run: |
+          nix build .#darwinConfigurations.dunghd.system
+
+      - name: Build darwin dev shell
+        run: |
+          nix build .#devShells.aarch64-darwin.default
