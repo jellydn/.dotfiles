@@ -22,7 +22,7 @@
       eza
       fzf
       tree
-      du-dust
+      dust
       duf
       procs
       sd

@@ -157,5 +157,5 @@
   };
 
   # ── State Version ──────────────────────────────────────────
-  system.stateVersion = 9;
+  system.stateVersion = 7;
 }
