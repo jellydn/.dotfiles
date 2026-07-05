@@ -42,8 +42,8 @@
 
   # ── Display / Desktop ──────────────────────────────────────
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -53,7 +53,7 @@
   services.printing.enable = true;
 
   # ── Sound (PipeWire) ───────────────────────────────────────
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -95,7 +95,7 @@
     nerd-fonts.inconsolata
     nerd-fonts.terminess-ttf
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   # ── Programs ───────────────────────────────────────────────

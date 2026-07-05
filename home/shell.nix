@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # ── Zsh ─────────────────────────────────────────────────────
@@ -18,33 +18,34 @@
       path = "$HOME/.zsh_history";
     };
 
-    # initExtraFirst runs early in zsh startup
-    initExtraFirst = ''
-      # Initialize Pure prompt
-      fpath+=("${pkgs.pure-prompt}/share/zsh/site-functions")
-      autoload -U promptinit && promptinit && prompt pure
-    '';
+    # initContent replaces initExtraFirst and initExtra
+    # Pure prompt runs early via mkBefore
+    initContent =
+      lib.mkBefore ''
+        # Initialize Pure prompt
+        fpath+=("${pkgs.pure-prompt}/share/zsh/site-functions")
+        autoload -U promptinit && promptinit && prompt pure
+      ''
+      + ''
+        # Atuin shell history
+        if command -v atuin &>/dev/null; then
+          eval "$(atuin init zsh)"
+        fi
 
-    initExtra = ''
-      # Atuin shell history
-      if command -v atuin &>/dev/null; then
-        eval "$(atuin init zsh)"
-      fi
+        # FZF
+        if command -v fzf &>/dev/null; then
+          source <(fzf --zsh)
+        fi
 
-      # FZF
-      if command -v fzf &>/dev/null; then
-        source <(fzf --zsh)
-      fi
+        # Finalize mise
+        if command -v mise &>/dev/null; then
+          eval "$(mise activate zsh)"
+        fi
 
-      # Finalize mise
-      if command -v mise &>/dev/null; then
-        eval "$(mise activate zsh)"
-      fi
-
-      # Locale
-      export LANG="en_US.UTF-8"
-      export LC_ALL="en_US.UTF-8"
-    '';
+        # Locale
+        export LANG="en_US.UTF-8"
+        export LC_ALL="en_US.UTF-8"
+      '';
   };
 
   # Zsh plugin packages
