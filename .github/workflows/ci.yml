@@ -7,6 +7,17 @@ on:
     branches: [main]
 
 jobs:
+  # ── Enforce Nix formatting with nix fmt --check ────────────
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v14
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Check Nix formatting
+        run: nix fmt --check
+
   # ── Evaluate flake for each target system ──────────────────
   # Nix evaluation is fast and catches syntax/type errors early.
   check:
@@ -24,6 +35,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-static binfmt-support
+
+      - name: Check Nix formatting
+        run: nix fmt --check
+
+      - name: nix flake check
+        run: nix flake check --system ${{ matrix.target }}
 
       - name: nix flake check
         run: nix flake check --system ${{ matrix.target }}
