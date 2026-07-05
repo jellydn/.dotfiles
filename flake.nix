@@ -31,10 +31,12 @@
     }:
     let
       # Shared home-manager config (works on both NixOS and macOS)
+      # Uses lib.mkForce to ensure our homeDirectory takes precedence over nix-darwin 26.05's default (null).
       homeConfig = { username, homeDirectory, ... }: {
         imports = [ ./home ];
         home = {
-          inherit username homeDirectory;
+          inherit username;
+          homeDirectory = nixpkgs.lib.mkForce homeDirectory;
           stateVersion = "26.05";
         };
       };

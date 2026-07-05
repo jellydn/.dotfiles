@@ -104,8 +104,7 @@
   };
 
   # ── LazyGit ─────────────────────────────────────────────────
-  # Config is symlinked from dotfiles repo via home/dotfiles-links.nix
-  programs.lazygit = {
-    enable = true;
-  };
+  # Package installed via home/packages.nix.
+  # Config is symlinked from dotfiles repo via home/dotfiles-links.nix.
+  # No programs.lazygit here to avoid conflicting with xdg.configFile in dotfiles-links.nix.
 }
