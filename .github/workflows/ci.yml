@@ -2,9 +2,7 @@ name: "Nix Flake CI"
 
 on:
   push:
-    branches: [main]
   pull_request:
-    branches: [main]
 
 jobs:
   # ── Enforce Nix formatting with nix fmt --check ────────────
@@ -38,9 +36,6 @@ jobs:
 
       - name: Check Nix formatting
         run: nix fmt --check
-
-      - name: nix flake check
-        run: nix flake check --system ${{ matrix.target }}
 
       - name: nix flake check
         run: nix flake check --system ${{ matrix.target }}
