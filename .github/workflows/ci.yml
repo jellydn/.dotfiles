@@ -9,7 +9,7 @@ jobs:
   format-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: DeterminateSystems/nix-installer-action@v14
@@ -31,7 +31,7 @@ jobs:
         target: [x86_64-linux, aarch64-linux]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: DeterminateSystems/nix-installer-action@v14
@@ -52,7 +52,7 @@ jobs:
   build-nixos:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: DeterminateSystems/nix-installer-action@v14
@@ -81,7 +81,7 @@ jobs:
   build-darwin:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: DeterminateSystems/nix-installer-action@v14
